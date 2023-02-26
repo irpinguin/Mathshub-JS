@@ -10,13 +10,15 @@
 
 header {
     background-color: lightgray;
-    height: 50px
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
 }
 
 nav {
-    /* border: 5px dotted black; */
-    /* width: max-content; */
     height: inherit;
+    width: inherit;
     display: flex;
     /* justify-content: start */
     align-items: center;
@@ -27,6 +29,14 @@ nav > a {
     padding: 0 30px;
     font-size: 20px;
 }
+nav > a:hover {
+    color: lightcoral;
+}
+
+main {
+    margin-top: 50px;
+}
+
 .about_us {
     display: flex;
     justify-content: center;
