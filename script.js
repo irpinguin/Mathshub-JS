@@ -1,7 +1,7 @@
 
 const getRandomNumInRange = (min, max) => {
     const randomNum = (Math.random() * (max - min) + min).toFixed(0)
-    return randomNum 
+    return randomNum
 }
 
 const getTask = () => {
@@ -40,10 +40,10 @@ const startGameFunc = () => {
     } else {
         const isRight = gameState.rightAnswer == userAnswer.value
         userTask.innerText = userTask.innerText + " = " + gameState.rightAnswer
-        title.innerText = (isRight ? "You win!" : "You lost!") 
+        title.innerText = (isRight ? "You win!" : "You lost!")
         toggleGameState()
         btnGame.innerText = (gameState.taskInProcess) ? "Check!" : "Try again!"
-    }    
+    }
 }
 btnGame.addEventListener("click", startGameFunc)
 userAnswer.addEventListener("keydown", (e) => {
@@ -75,7 +75,7 @@ const choosedState = {
     countElements: 0,
     setCountValue(value) {
         this.countElements += value
-        counterEl.innerText = choosedState.countElements    
+        counterEl.innerText = choosedState.countElements
     }
 }
 
@@ -94,4 +94,89 @@ const eventFunc = (e) => {
 for (let i = 0; i < choosedEl.length; i++) {
     choosedEl[i].addEventListener("click", eventFunc)
 }
-choosedEl[2].removeEventListener("click", eventFunc)
+// choosedEl[2].removeEventListener("click", eventFunc)
+
+
+
+
+
+
+// const timeIsOver = () => {
+//     alert("Time is up!")
+// }
+// setTimeout(timeIsOver, 5000)
+// const alarm = setInterval(timeIsOver, 3000)
+// clearInterval(alarm)
+
+// будильник
+// const alarm = setInterval(() => {
+//     let wantToSleep = confirm("Хотите ли вы спасть?")
+//     if (wantToSleep) {
+//         console.log("tick")
+//     } else {
+//         clearInterval(alarm)
+//     }
+// }, 3000)
+
+// асинхронность
+// console.log("1")
+// setTimeout(() => {
+//     console.log("2")
+// }, 0)
+
+// console.log("3")
+
+
+
+
+const postsBlock = document.querySelector(".posts_block-container")
+const showPostsBTN = document.querySelector(".posts_block button")
+
+
+function addPost(title, body) {
+    const postTitle = document.createElement("h3")
+    const postBody = document.createElement("span")
+    const postItem = document.createElement("p")
+
+    postItem.append(postTitle, postBody)
+    postsBlock.append(postItem)
+
+    postTitle.innerText = title
+    postBody.innerText = body
+}
+
+function getPosts() {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        for (el of data) {
+            addPost(el.title, el.body)
+        }
+    })
+    .catch(err => console.log(err.message))
+}
+
+// function createPost(title, body, userId) {
+//     fetch("https://jsonplaceholder.typicode.com/posts", {
+//         method: "POST",
+//         body: JSON.stringify ({
+//             title: title,
+//             body: body,
+//             userId: userId,
+//         }),
+//         headers: {
+//             'Content-type': 'application/json; charset=UTF-8',
+//         },
+//     })
+//         .then(response => {
+//             console.log(response)
+//             return response.json()
+//         })
+//     .catch (err => console.log(err.message))
+// }
+
+// createPost("Title test", "Body test", 15)
+
+showPostsBTN.onclick = () => getPosts()
